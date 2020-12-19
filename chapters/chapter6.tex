@@ -1,0 +1,123 @@
+%% ----------------------------------------------------------------
+%% Chapter 6: Conclusions and future work
+%% ----------------------------------------------------------------
+%!TeX root = subfile
+\label{chapter:conclusions}
+\documentclass[../main.tex]{subfiles}
+% ----------------------------------------------------------------
+\begin{document}
+
+\section{Summary of contributions}
+
+This work proposes to drastically speed up turbulent flow simulation by averaging in a homogeneous direction, such as along the span of a marine riser, a slender building, or an aircraft wing.
+Differently from standard strip-theory methods, 3-D turbulence effects are directly incorporated in the 2-D system as closure terms, thus significantly improving current 2-D models.
+This has been accomplished with the following main contributions,
+\begin{itemize}
+	\item Improved physical understanding of the role of small-scale 3-D structures in high-Reynolds incompressible wake flow and the forces induced to the cylinder.
+	\item A new 2-D model arising from a dimensionality reduction of the 3-D flow by local spanwise averaging.
+	\item The design of a ML closure for the spanwise-averaged equations system based on a CNN.
+\end{itemize}
+
+First, the 3-D effects inherent in turbulent flows which present an homogeneous direction have been investigated by a systematic reduction of the span of a circular cylinder at $Re=10^4$.
+Multiple span lengths ranging from a pure 2-D system to 10 diameters have been analysed using highly-resolved simulations.
+Different turbulence metrics of the wake have revealed that small-scale 3-D structures can be observed even when the span is less than half a diameter long.
+The small-scale structures generated in the shear layer are rapidly two-dimensionalised by the natural large-scale rotation of the K\'{a}rm\'{a}n vortices, a mechanism also encountered in obstacle-free turbulent flows \citep{Smith1996,Xia2011}.
+It has been found that the critical span at which 3-D turbulence dynamics dominate the wake is the Mode B instability wavelength (approximately one diameter), in agreement with \cite{Bao2016}.
+Since the Mode B instability helps sustaining the turbulent structures advected from the shear layer, the lack of it prevents large-scale 3-D structures to be created and less dissipative structures can be sustained.
+Additionally, it has been also shown that 2-D and 3-D turbulence dynamics can coexist at certain positions of the wake depending on the domain geometric anisotropy.
+
+In order to reduce the computational cost of simulating turbulent wake flow, a model based on the flow spatial average in its homogeneous direction is proposed, thus reducing the problem dimensionality from 3-D to 2-D.
+This 2-D model, namely the spanwise-averaged Navier--Stokes (SANS) equations, incorporates 3-D effects in the form of SSR closure terms, which change the flow dynamics from standard 2-D Navier--Stokes to spanwise-averaged dynamics.
+The verification of the SANS equations has been conducted for the Taylor--Green vortex and the cylinder wake flow cases using the perfect closure model.
+The perfect closure is the residual between the spanwise-averaged 3-D spatial operator and the 2-D spatial operator of the momentum equations.
+For both test cases, extracting the perfect closure from a 3-D simulation and inserting it into the 2-D solver has allowed to recover the unsteady spanwise-averaged flow, as shown in the temporal evolution of global energy and enstrophy. 
+For the circular cylinder test case, including the perfect closure in the SANS simulation yields forces induced to the cylinder as obtained in the high-fidelity 3-D simulation at a fraction of its computational cost.
+
+Since the perfect closure is not available when deploying SANS in a live simulation, alternative models have been investigated.
+A standard EVM employing the Smagorinsky closure has been tested in the a-priori framework.
+The EVM has provided very low accuracy for the modelling of the SANS closure terms.
+This is related to the intrinsic formulation of the eddy-viscosity hypothesis, which assumes that turbulent fluctuations only have a dissipative effect.
+In the spanwise-averaged system, the spanwise stresses can be both dissipative and energising, and this is a fundamental difference which no EVM can reproduce.
+
+Because of the EVM poor performance, a data-driven approach has been designed to improve the SANS closure terms prediction.
+The use of data-driven model for a SANS strip-theory method is advantageous because the training dataset can be obtained in a 3-D high-fidelity simulation only comprising the spanwise-averaging length, instead of the full span (as in \fref{fig:strips}, where $L_a\ll L_z$).
+This is justified by the flow spanwise homogeneity, since an equivalent dataset would be obtained for a 3-D simulation in a spanwise-shifted location.
+The trained ML model could then be used for all the 2-D strips in a SANS strip-theory framework.
+A ML model based in a CNN has been considered for the modelling of the spanwise stresses, and a dataset of the closure terms has been generated for a circular cylinder of one diameter span.
+
+In the a-priori analysis, the ML model prediction of the anisotropic SSR tensor components has provided correlations of 90-92\%, thus greatly improving the EVM performance.
+While large-scale structures were overall correctly captured, small-scale structures were still hard to predict, as also found in other CNN-based data-driven models for turbulent flows \citep{Lee2019}.
+Additionally, the ML model trained with a single test case (circular cylinder at $Re=10^4$) has been assessed for other Reynolds regimes and body geometries.
+It has been observed that the ML model is still capable of correctly predicting the SANS closure terms in the downstream wake region with high correlation values ($86\%-96\%$).
+On the other hand, the prediction of the near-body region has shown a poorer performance because of the case-dependent shear layer that different flow regimes and body geometries develop.
+
+In the a-posteriori analysis, it has been found that applying the divergence operator to the raw output of the SSR tensor ML model prediction amplifies the modelling error significantly, hence yielding an unstable closure as also observed in \cite{Cruz2019}.
+Because of this, the perfect closure has been targeted as the new ML model output, instead of the SSR tensor components, so that no derivatives are directly applied to the ML predictions.
+The ML model a-priori performance on the perfect closure terms showed correlations of 89-90\% with the target quantities.
+In the a-posteriori analysis, the ML model predicts the perfect closure at every time step based only on the resolved flow quantities $(\vect{U},P)$.
+While we found evidence of known stability issues with long-time ML model predictions for dynamical systems, the closed SANS simulations are still capable of predicting wake metrics and induced forces with errors from 1-10\%.
+This results in approximately an order of magnitude improvement over standard 2-D simulations while reducing the computational cost of 3-D simulations by 99.5\%.
+
+\section{Technical achievements}
+
+The fluid solver used throughout this thesis is the in-house 3-D iLES immersed-boundary code ``Lotus'', described in \cref{chapter:theoretical_background} and developed by Gabriel D. Weymouth as an extension of the 2-D real-time fluid solver ``Lily Pad'' \citep{Weymouth2015-LilyPad}.
+Contributions to ``Lotus'' have been made to accommodate the solver for the needs of this work (or not) such as an extension for internal flows, addition of a passive scalar equation, adaptation of the software package to be run in HPC facilities (supercomputers), and an interface to allow data transfer between the Fortran fluid solver and the Python ML model \citep{Font2019-f2py}.
+More details of the Fortran-Python interface can be found in \aref{chapter:appendixE} together with specifications of the hardware employed.
+
+As any computational investigation, a significant part of the workload has been spent in post-processing data.
+All the developed post-processing tools have been gathered in \cite{Font2018-postproc}, such as the analysis of turbulence statistics, tracking flow separation points on the cylinder surface, data plotting and video rendering, among others.
+On the other hand, the implemented ML model providing closure to the SANS equations can be found in \cite{Font2019-sanspy}. 
+It has been written using Keras \citep{Chollet2015}, a high-level deep-learning Python library employing TensorFlow \citep{Tensorflow} as backend.
+
+\section{Limitations}
+
+The SANS equations have been proposed as an improvement of current 2-D strip-theory methods, which do not take into account the 3-D turbulence effects of the flow and instead use arbitrarily dissipative turbulence models.
+However, some intrinsic limitations of standard strip-theory methods would also apply to a SANS-based strip-theory method. 
+For example, strip-theory methods cannot directly capture variations of the flow out-of-plane angle of attack or twisting of the cylinder.
+In this scenario, the flow would no longer be homogeneous in the spanwise direction and the SANS system would struggle to provide a physical answer.
+Regarding the strips spanwise resolution, the minimum number of 2-D planes still depends on the highest mode of the structural response, and three 2-D planes per half wavelength would be required \citep{Willden2004}.
+
+With respect to the SANS equations closure, known limitations of ML models have also been faced.
+A certain degree of randomness of the ML model has been observed both in a-priori and a-posteriori frameworks.
+This is derived from the fact that the CNN weights are initialised in a random manner and that stochastic backpropagation is used for the CNN weights optimisation.
+This has translated in failed trainings of the CNN as well as converged optimisations which yield poor results in the a-posteriori analysis.
+In these cases, the training has been repeated until a better local minima was reached.
+
+The generalisation of the ML model to flow configurations different from the training case (in terms of Reynolds number and body geometry) has also presented difficulties in the prediction of the SANS closure terms near the body.
+This arises from fact that the shear-layer region is strongly case-dependant and such information was only provided by the single training case.
+Adding other flow configurations to the database could help mitigate this issue.
+
+Furthermore, the ML model error accumulation in the resolved quantities during an a-posteriori run is an important limitation of the current approach.
+Although successful for short temporal dynamics, the implemented ML model diverges from the spanwise-averaged attractor at every time step.
+Eventually, it yields a non-physical solution and the simulation has to be stopped.
+Still, the current model works as a proof-of-concept which simultaneously serve the purpose of motivating other authors to develop new closures of the SANS equations.
+
+\section{Recommendations for future work}
+
+All the exposed limitations of the current work offer an opportunity for improvement.
+The main impediment encountered is, as exposed, the limited closure stability of the current ML model for the SANS equations.
+The development of a general and stable closure for SANS could represent a turning point in the simulation of slender bodies as a result of new SANS strip-theory methods.
+In this regard, the following ideas could be worth exploring:
+\begin{itemize}
+	\item A CNN model embedded in a RNN architecture to capture both the spatial patterns and the temporal dynamics of the SANS closure terms.
+	In convolutional RNNs, a series of consecutive snapshots are provided as input data so that the model learns how spatial structures evolve in time.
+	RNNs have demonstrated to be successful for the prediction of statistically-stationary metrics in chaotic systems \citep{Vlachas2018,Kim2020a}.
+
+	\item Adding a physical constraint in the loss function (a.k.a physics-based machine learning, or PBML) has also been useful for improving the stability of ML-based closures, as shown in \cite{Lee2019}.
+	At the same time, the dataset size required for optimisation can be significantly reduced when using PBML models \citep{Weymouth2019}.
+
+	\item Projection of the ML model predictions into a stable closure. This has been done for a ML model of SGS stresses in a LES framework, where the ML model output is fit into an EVM \citep{Beck2019}.
+	This approach would not work for the SANS equations since it has been shown that EVMs are not suited for the modelling of spanwise stresses.
+	Still, a stable closure accounting for production and dissipation of the closure terms similarly to Reynolds-stress models in RANS could be investigated.
+
+	\item Learning how to reverse the 2-D dynamics domination over the spanwise-averaged dynamics. 
+	This could be explored by feeding the ML model a spanwise-averaged snapshot followed by snapshots evolved without the inclusion of the SSR terms.
+	The model would be informed that this temporal dynamics are to be corrected by providing the actual spanwise-averaged snapshot of the next time step in the loss function.
+	In this way, the ML model weights can be optimise to prevent or reverse 2-D dynamics back to spanwise-averaged flow.
+
+	\item Use of a generative adversarial neural network \citep{Goodfellow2014} able to discern when the ML model prediction is not within the spanwise-averaged system attractor.
+	This can also help identifying the 2-D dynamics dominating the flow and trigger a corrective action.
+	Such corrective action could be the projection of the 2-D dominated flow field into a realistic spanwise-averaged snapshot according to examples previously shown during training.
+\end{itemize}
+% ---------------------------------------------------------------- 
+\end{document}

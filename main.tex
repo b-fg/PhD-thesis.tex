@@ -1,0 +1,118 @@
+%% ---------------------------------------------------------------
+%% author: Bernat Font Garcia
+%% tex: A document containing my PhD thesis
+%% ---------------------------------------------------------------
+\documentclass[11pt, a4paper]{etc/feereport}
+\usepackage{subfiles}
+\graphicspath{{img/}{../img/}{../../img/}}
+%%----------------------------------------------------------------
+%% pdf authorship settings
+\usepackage{hyperref}
+\hypersetup{
+	unicode=true, 
+	pdfnewwindow=true, 
+	colorlinks=true, 	% (false,true)
+	pdfborder={0 0 0},	
+	linkcolor=blue,
+	linktoc=all, 		% (none,all) 
+	citecolor=blue,
+	urlcolor=blue,
+	breaklinks=true
+}
+% \usepackage{setspace}
+% \singlespacing
+% \onehalfspacing
+% \doublespacing
+\input{etc/definitions}
+%% ---------------------------------------------------------------
+\begin{document}
+\frontmatter
+
+\title{Modelling of Flow Past Long Cylindrical Structures}
+\date{September 2020}
+\author{Bernat Font Garcia}
+\email{b.fontgarcia@soton.ac.uk}
+\supervisor{Owen R. Tutty, Gabriel D. Weymouth, Vinh-Tan Nguyen}
+\department{Aerodynamics and Flight Mechanics Group}
+\group{Aerodynamics and Flight Mechanics Group}
+\faculty{Faculty of Engineering and Physical Sciences}
+\university{University of Southampton}
+
+\maketitle
+
+\begin{abstract}
+Turbulent flows are fundamental in engineering and the environment, but their chaotic and three-dimensional (3-D) nature makes them computationally expensive to simulate.
+In this work, a dimensionality reduction technique is investigated to exploit flows presenting an homogeneous direction, such as wake flows of extruded two-dimensional (2-D) geometries.
+First, we examine the effect of the homogeneous direction span on the wake turbulence dynamics of incompressible flow past a circular cylinder at $Re=10^4$.
+It is found that the presence of a solid wall induces 3-D structures even in highly constricted domains.
+The 3-D structures are rapidly two-dimensionalised by the large-scale K\'{a}rm\'{a}n vortices if the cylinder span is 50\% of the diameter or less, as a result of the span being shorter than the natural wake Mode B instability wavelength.
+It is also observed that 2-D and 3-D turbulence dynamics can coexist at certain points in the wake depending on the domain geometric anisotropy.
+With this physical understanding, a 2-D data-driven model that incorporates 3-D effects, as found in the 3-D wake flow, is presented.
+The 2-D model is derived from a novel flow decomposition based on a local spanwise average of the flow, yielding the spanwise-averaged Navier--Stokes (SANS) equations.
+The 3-D effects included in the SANS equations are in the form of spanwise-stress residual (SSR) terms.
+The inclusion of the SSR terms in 2-D systems modifies the flow dynamics from standard 2-D Navier--Stokes to spanwise-averaged dynamics.
+A machine-learning (ML) model is employed to provide closure to the SANS equations.
+In the a-priori framework, the ML model yields accurate predictions of the SSR terms, in contrast to a standard eddy-viscosity model which completely fails to capture the closure term structures.
+The trained ML model is also assessed for different Reynolds regimes and body shapes to the training case where, despite some discrepancies in the shear-layer region, high correlation values are still observed.
+In the a-posteriori analysis, while we find evidence of known stability issues with long-time ML predictions for dynamical systems, the closed SANS equations are still capable of predicting wake metrics and induced forces with errors from 1-10\%.
+This results in approximately an order of magnitude improvement over standard 2-D simulations while reducing the computational cost of 3-D simulations by 99.5\%.
+\end{abstract}
+
+\begingroup 
+\tableofcontents
+\listoffigures
+\listoftables
+\endgroup
+
+\declaration
+\dedicatory{Dedicat a la meva família, la de naixement i l'escollida.}
+\acknowledgements{
+I am forever indebted with all my three supervisors: Gabriel D. Weymouth, Owen R. Tutty and Vinh-Tan Nguyen. 
+I have learnt so much from all of you, and I could have never imagined working in a better team, both from a personal and a professional standpoint.
+You have always been there for the good and (more importantly) for the bad. 
+Thank you very much.
+
+I also thank the University of Southampton and the Singapore Agency for Science, Technology and Research (A*STAR).
+The collaboration between the A*STAR Institute of High Performance Computing and the Faculty of Engineering and Physical Sciences of the University of Southampton has made this work possible.
+
+Last but not least, I want to thank all the good friends I have made in Southampton and Singapore.
+Together we have supported each other and shared unforgettable moments.
+Thank you for being there.
+}
+\nomenclature
+
+%% ---------------------------------------------------------------
+\mainmatter
+
+\chapter{Introduction}
+\subfile{chapters/chapter1}
+\chapter{Theoretical background}
+\subfile{chapters/chapter2}
+\chapter{Span effect on the turbulence nature of flow past a circular cylinder} 
+\subfile{chapters/chapter3}
+\chapter{The spanwise-averaged Navier--Stokes equations}
+\subfile{chapters/chapter4}
+\chapter{A machine-learning model for SANS}
+\subfile{chapters/chapter5}
+\chapter{Conclusions and future work}
+\subfile{chapters/chapter6}
+
+\appendix
+
+\chapter{Reynolds regimes of flow past a circular cylinder}
+\subfile{chapters/appendices/appendixA}
+\chapter{Validation and verification of the in-house solver}
+\subfile{chapters/appendices/appendixB}
+\chapter{Additional SANS derivations}
+\subfile{chapters/appendices/appendixC}
+\chapter{Machine-learning model hyper-parameters tuning}
+\subfile{chapters/appendices/appendixD}
+\chapter{Hardware and software details}
+\subfile{chapters/appendices/appendixE}
+
+\backmatter
+
+\bibliographystyle{etc/apalike-refs}
+\bibliography{references}
+%% ---------------------------------------------------------------
+\end{document}

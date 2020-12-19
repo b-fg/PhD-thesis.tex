@@ -1,0 +1,390 @@
+%% ----------------------------------------------------------------
+%% Appendix: Additional SANS derivations
+%% ----------------------------------------------------------------
+%!TeX root = subfile
+\label{chapter:appendixC}
+\markboth{Appendix C Additional SANS derivations}{Appendix C Additional SANS derivations}
+\documentclass[../main.tex]{subfiles}
+% ---------------------------------------------------------------- 
+\begin{document}
+\section{The spanwise-averaged vorticity transport equation}
+\label{sec:savte}
+The non-dimensional vorticity transport equation (VTE) can be written in its conservation form as
+\begin{equation}
+\partial_t\boldsymbol\omega+\nabla \cdot \pars{\vect{u}\otimes\boldsymbol{\omega}}=\nabla \cdot \pars{\boldsymbol{\omega}\otimes\vect{u}}+Re^{-1}\nabla^2\boldsymbol{\omega}.\label{eq:VTE}
+\end{equation}
+Decomposing and averaging similarly to \sref{sec:sans_math}, the following spanwise-averaged VTE can be obtained for the $\vect{e}_z$ component of \eref{eq:VTE},
+\begin{gather}
+\partial_t {\Omega}_z + U\partial_x{\Omega}_z + V\partial_y{\Omega}_z = Re^{-1}\pars{\partial_{xx}{\Omega}_z + \partial_{yy}{\Omega}_z}-\nonumber \\
+-\partial_x\pars{\avg{u\p\omega_z\p}-\avg{\omega_x\p w\p}}-\partial_y\pars{\avg{v\p\omega_z\p}-\avg{\omega_y\p w\p}}+\nonumber \\
++{\Omega}_x\partial_xW+{\Omega}_y\partial_yW+{\Omega}_z\avg{\partial_z w\p}-W\avg{\partial_z\omega_z\p}+Re^{-1}\avg{\partial_{zz}\omega_z\p}, \label{eq:vort_e3_avg}
+\end{gather}
+where the spanwise-averaged divergence of the velocity and vorticity vector fields, respectively
+\begin{gather}
+\partial_x{U}+\partial_y{V}=-\avg{\partial_z{w\p}},\\
+\partial_x{{\Omega}_x}+\partial_y{{\Omega}_y}=-\avg{\partial_z{\omega_z\p}},
+\end{gather}
+has been introduced to obtain the non-conservation form.
+
+When spanwise periodicity is assumed, the third line in \eref{eq:vort_e3_avg} vanishes by its last three terms cancelling by definition (\eref{eq:periodic_assumption}), and the first two terms cancelling each other as follows,
+\begin{gather}
+{\Omega}_x\partial_xW+{\Omega}_y\partial_yW=\avg{\partial_y{w}-\partial_z{v}}\partial_x{W}+\avg{\partial_z{u}-\partial_z{w}}\partial_y{W}=\nonumber\\
+=\avg{\partial_y{\pars{W+w\p}}-\partial_z{\pars{V+v\p}}}\partial_x{W}+\avg{\partial_z{\pars{U+u\p}}-\partial_z{\pars{W+v\p}}}\partial_y{W}=\nonumber\\
+=\pars{\partial_y{W}-\cancelto{0}{\avg{\partial_z{v\p}}}}\partial_x{W}+\pars{\cancelto{0}{\avg{\partial_z{u\p}}}-\partial_x{W}}\partial_y{W}=0.
+\end{gather}
+
+The spanwise-averaged VTE is then simplified to
+\begin{equation}
+\partial_t {\Omega}_z + \vect{U}\cdot\nabla{\Omega}_z = Re^{-1}\nabla^2{\Omega}_z-\nabla\cdot\boldsymbol\zeta^R,
+\end{equation}
+where $\vect{U}=\pars{U,V}$ and $\boldsymbol \zeta^R = \pars{\avg{u\p\omega_z\p}-\avg{\omega_x\p w\p}, \avg{v\p\omega_z\p}-\avg{\omega_y\p w\p}}$.
+
+\subsection{Cylindrical coordinates} \label{sec:cyl_coords}
+
+In a cylindrical coordinates system, using $(\vect{e}_r,\vect{e}_\theta,\vect{e}_z)$ and
+\begin{equation}
+\nabla = \pars{\frac{1}{r}\pd{\pars{r\cdot}}{r}, \frac{1}{r}\pd{\pars{\cdot}}{\theta}, \pd{\pars{\cdot}}{z}},
+\end{equation}
+the $\vect{e}_z$ component of the non-dimensional VTE (\eref{eq:VTE}) can be written as
+\begin{gather}
+\pd{\omega_z}{t}+\frac{1}{r}\pd{\pars{r u_r\omega_z}}{r}+\frac{1}{r}\pd{\pars{u_\theta\omega_z}}{\theta}+\cancel{\pd{\pars{u_r\omega_z}}{z}}=\nonumber\\
+=\frac{1}{r}\pd{\pars{r \omega_r u_z}}{r}+\frac{1}{r}\pd{\pars{\omega_\theta u_z}}{\theta}+\cancel{\pd{\pars{\omega_z u_r}}{z}}+\frac{1}{Re}\pars{\ddn{\omega_z}{r}{2}+\frac{1}{r}\pd{\omega_z}{r}+\frac{1}{r^2}\ddn{\omega_z}{\theta}{2}+\ddn{\omega_z}{z}{2}}.
+\label{eq:VTE_cyl}
+\end{gather}
+
+A decomposition and average similarly to \sref{sec:sans_math} yields
+\begin{gather}
+\pd{{\Omega}_z}{t}+\frac{1}{r}\pd{\pars{r U_r{\Omega}_z+\avg{r u_r\p\omega_z\p}}}{r}+\frac{1}{r}\pd{\pars{U_\theta{\Omega}_z+\avg{u_\theta\p\omega_z\p}}}{\theta}=\nonumber\\
+=\frac{1}{r}\pd{\pars{r {\Omega}_r U_z + \avg{r\omega_r\p u_z\p}}}{r}+\frac{1}{r}\pd{\pars{{\Omega}_\theta U_z+\avg{\omega_\theta\p u_z\p}}}{\theta}+\nonumber\\
++\frac{1}{Re}\pars{\ddn{{\Omega}_z}{r}{2}+\frac{1}{r}\pd{{\Omega}_z}{r}+\frac{1}{r^2}\ddn{{\Omega}_z}{\theta}{2}+\avg{\ddn{\omega_z\p}{z}{2}}}.
+\label{eq:VTE_cyl_avg}
+\end{gather}
+
+The spanwise-averaged divergence of the velocity and vorticity fields can be respectively written in cylindrical coordinates as
+\begin{gather}
+\frac{1}{r}\pd{\pars{rU_r}}{r}+\frac{1}{r}\pd{U_\theta}{\theta}=-\avg{\pd{u_z\p}{z}},\label{eq:cont_avg_cyl}\\
+\frac{1}{r}\pd{\pars{r{\Omega}_r}}{r}+\frac{1}{r}\pd{{\Omega}_\theta}{\theta}=-\avg{\pd{\omega_z\p}{z}}\label{eq:divort_avg_cyl},
+\end{gather}
+and introducing \eref{eq:cont_avg_cyl} and \eref{eq:divort_avg_cyl} into \eref{eq:VTE_cyl_avg} yields
+\begin{gather}
+\pd{{\Omega}_z}{t}+U_r\pd{{\Omega}_z}{r}+\frac{U_\theta}{r}\pd{{\Omega}_z}{\theta}={\Omega}_r\pd{U_z}{r}+\frac{{\Omega}_\theta}{r}\pd{U_z}{\theta}+\frac{1}{Re}\pars{\ddn{{\Omega}_z}{r}{2}+\frac{1}{r}\pd{{\Omega}_z}{r}+\frac{1}{r^2}\ddn{{\Omega}_z}{\theta}{2}}-\nonumber\\
+-\frac{1}{r}\bracs{\pd{}{r}\pars{\avg{r u_r\p\omega_z\p}-\avg{r \omega_r\p u_z\p}}+
+\pd{}{\theta}\pars{\avg{u_\theta\p\omega_z\p}-\avg{\omega_\theta\p u_z\p}}}+\nonumber\\
++{\Omega}_z\avg{\pd{u_z\p}{z}}-U_z\avg{\pd{\omega_z\p}{z}}+\frac{1}{Re}\avg{\ddn{\omega_z\p}{z}{2}}.
+\end{gather}
+
+\subsection{Relationship between SANS and spanwise-averaged VTE formulations}
+
+Next, we show how the spanwise stresses in the SANS and the spanwise-averaged VTE frameworks are related.
+First, we derive an expression for the vorticity-velocity terms of the spanwise-averaged VTE to write them as velocity-velocity terms.
+Considering the following vector identity
+\begin{equation}
+\frac{1}{2} \nabla \left( \vect{a}\cdot\vect{a} \right) = (\vect{a} \cdot \nabla) \vect{a} + \vect{a} \times (\nabla \times \vect{a}),
+\end{equation}
+we can rewrite the vector identity in terms of fluctuating quantities
+\begin{equation}
+\frac{1}{2} \nabla \left( \vect{u}\p\cdot\vect{u}\p \right) = (\vect{u}\p \cdot \nabla) \vect{u}\p + \vect{u}\p \times \boldsymbol{\omega}\p,\label{eq:vect_identity_fluct}
+\end{equation}
+where the definition of the vorticity vector field, $\vect{\omega}=\nabla\times\vect{u}$, has been introduced.
+
+Second, the conservation form of the convective forces can be expressed as
+\begin{equation}
+\nabla\cdot\pars{\vect u \otimes\vect u}=\pars{\vect u \cdot \nabla}\vect u + \vect u\pars{\nabla\cdot\vect u},
+\end{equation}
+and it can be rewritten for the fluctuating quantities as
+\begin{gather}
+\nabla\cdot\pars{\vect u\p \otimes\vect u\p}=\pars{\vect u\p \cdot \nabla}\vect u\p + \vect u\p\pars{\nabla\cdot\vect u\p},\\
+\pars{\vect u\p \cdot \nabla}\vect u\p = \nabla\cdot\pars{\vect u\p \otimes\vect u\p}-\vect u\p\pars{\nabla\cdot\vect u\p}.\label{eq:conv_term_fluct}
+\end{gather}
+
+Third, decomposing the continuity equation for incompressible flows (\eref{eq:cont})
+\begin{equation}
+\partial_xU+\partial_xu\p+\partial_yV+\partial_yv\p+\partial_zw\p=0,\label{eq:continuity_decomp}
+\end{equation}
+and subtracting the averaged continuity equation (\eref{eq:cont_decomp_avg}) yields
+\begin{equation}
+\partial_xu\p+\partial_yv\p+\partial_zw\p-\avg{\partial_z w\p}=0,
+\end{equation}
+hence
+\begin{equation}
+\nabla\cdot\vect u\p =\avg{\partial_z w\p}.\label{eq:cont_fluct}
+\end{equation}
+
+We now introduce \eref{eq:cont_fluct} into \eref{eq:conv_term_fluct} obtaining
+\begin{equation}
+\pars{\vect u\p \cdot \nabla}\vect u\p = \nabla\cdot\pars{\vect u\p \otimes\vect u\p}-\vect u\p\avg{\partial_z w\p},\label{eq:conv_term_fluct2}
+\end{equation}
+and \eref{eq:conv_term_fluct2} is finally introduced into \eref{eq:vect_identity_fluct}
+\begin{equation}
+\frac{1}{2} \nabla \left( \vect{u}\p\cdot\vect{u}\p \right) = \nabla\cdot\pars{\vect u\p \otimes\vect u\p}-\vect u\p\avg{\partial_z w\p} + \vect{u}\p \times \boldsymbol{\omega}\p,
+\end{equation}
+which yields
+\begin{equation}
+\boldsymbol{\omega}\p\times\vect{u}\p = \nabla\cdot\pars{\vect u\p \otimes\vect u\p} - \frac{1}{2} \nabla \left( \vect{u}\p\cdot\vect{u}\p \right) - \vect u\p\avg{\partial_z w\p}.
+\label{eq:vect_identity_fluct2}
+\end{equation}
+
+With this, a relation between the vorticity-velocity spanwise stresses and the velocity-velocity spanwise stresses is defined in the conservation form.
+To derive a more explicit form of the spanwise-averaged stresses, let us average \eref{eq:vect_identity_fluct2} and retrieve its $\vect{e}_x$ and $\vect{e}_y$ components
+\begin{gather}
+\vect{e}_x: \quad \avg{\omega_y\p w\p}-\avg{\omega_z\p v\p} = \partial_x\avg{u\p u\p}+\partial_y\avg{v\p u\p}+\avg{\partial_z\pars{w\p u\p}}-\nonumber\\
+-\partial_x\pars{\avg{u\p u\p}+\avg{v\p v\p}+\avg{w\p w\p}}/2,\label{eq:vec_ident_fluct_e1}\\
+\vect{e}_y: \quad \avg{\omega_z\p u\p}-\avg{\omega_x\p w\p} = \partial_x\avg{u\p v\p}+\partial_y\avg{v\p v\p}+\avg{\partial_z\pars{w\p v\p}}-\nonumber\\
+-\partial_y\pars{\avg{u\p u\p}+\avg{v\p v\p}+\avg{w\p w\p}}/2\label{eq:vec_ident_fluct_e2}.
+\end{gather}
+Note that the last term of \eref{eq:vect_identity_fluct2} vanishes because of \eref{eq:rule2}. 
+
+The spanwise stresses of the spanwise-averaged VTE (\eref{eq:vort_e3_avg}) can be expanded using Eqs. \ref{eq:vec_ident_fluct_e1} and \ref{eq:vec_ident_fluct_e2} as follows
+\begin{gather}
+-\partial_x\pars{\avg{u\p\omega_z\p}-\avg{\omega_x\p w\p}}-\partial_y\pars{\avg{v\p\omega_z\p}-\avg{\omega_y\p w\p}} = \nonumber\\
+=-\partial_x\pars{\partial_x\avg{u\p v\p}+\partial_y\avg{v\p v\p}+\avg{\partial_z\pars{w\p v\p}} - \partial_y\pars{\avg{u\p u\p}+\avg{v\p v\p}+\avg{w\p w\p}}/2} +\nonumber\\
++\partial_y\pars{\partial_x\avg{u\p u\p}+\partial_y\avg{v\p u\p}+\avg{\partial_z\pars{w\p u\p}} - \partial_x\pars{\avg{u\p u\p}+\avg{v\p v\p}+\avg{w\p w\p}}/2}=\nonumber\\
+=-\partial_{xx}\avg{u\p v\p}-\partial_{xy}\avg{v\p v\p}-\partial_x\avg{\partial_z\pars{w\p v\p}}+\partial_{xy}\pars{\avg{u\p u\p}+\avg{v\p v\p}+\avg{w\p w\p}}/2+\nonumber\\
++\partial_{xy}\avg{u\p u\p}+\partial_{yy}\avg{v\p u\p}+\partial_y\avg{\partial_z\pars{w\p u\p}}-\partial_{xy}\pars{\avg{u\p u\p}+\avg{v\p v\p}+\avg{w\p w\p}}/2=\nonumber\\
+=\pars{\partial_{yy}-\partial_{xx}}\avg{u\p v\p}+\partial_{xy}\pars{\avg{u\p u\p}-\avg{v\p v\p}}+\partial_y\avg{\partial_z\pars{w\p u\p}}-\partial_x\avg{\partial_z\pars{w\p v\p}}\label{eq:vte_spanwise_stresses}.
+\end{gather}
+
+On the other hand, the SANS equations (Eqs. \ref{eq:z-avg_X} to \ref{eq:z-avg_Z}) have yield the following spanwise stresses
+\begin{equation}
+-\avg{\nabla\cdot\pars{\vect u\p\otimes\vect u\p}}=
+-\begin{pmatrix}
+    \partial_x\avg{u\p u\p}+\partial_y\avg{u\p v\p}+\avg{\partial_z\pars{w\p u\p}} \\
+    \partial_x\avg{v\p u\p}+\partial_y\avg{v\p v\p}+\avg{\partial_z\pars{w\p v\p}} \\
+    \partial_x\avg{w\p u\p}+\partial_y\avg{w\p v\p}+\avg{\partial_z\pars{w\p w\p}}
+  \end{pmatrix}.
+\end{equation}
+Taking the curl of the momentum spanwise stresses
+\begin{equation}
+-\nabla\times\avg{\nabla\cdot\pars{\vect u\p\otimes\vect u\p}}=-
+\begin{pmatrix}
+    \vect{e}_x & \partial_x & \partial_x\avg{u\p u\p}+\partial_y\avg{u\p v\p}+\avg{\partial_z\pars{w\p u\p}} \\
+    \vect{e}_y & \partial_y & \partial_x\avg{v\p u\p}+\partial_y\avg{v\p v\p}+\avg{\partial_z\pars{w\p v\p}} \\
+    \vect{e}_z & \partial_z & \partial_x\avg{w\p u\p}+\partial_y\avg{w\p v\p}+\avg{\partial_z\pars{w\p w\p}}
+  \end{pmatrix},
+\end{equation}
+recovers the VTE spanwise stresses as demonstrated for the $\vect{e}_z$ component
+\begin{gather}
+-\nabla\times\avg{\nabla\cdot\pars{\vect u\p\otimes\vect u\p}}\vect{e}_z=\nonumber\\
+=-\partial_x\pars{\partial_x\avg{v\p u\p}+\partial_y\avg{v\p v\p}+\avg{\partial_z\pars{w\p v\p}}}
++\partial_y\pars{\partial_x\avg{u\p u\p}+\partial_y\avg{u\p v\p}+\avg{\partial_z\pars{w\p u\p}}}=\nonumber\\
+=-\partial_{xx}\avg{v\p u\p}-\partial_{xy}\avg{v\p v\p}-\partial_x\avg{\partial_z\pars{w\p v\p}}+\partial_{xy}\avg{u\p u\p}+\partial_{yy}\avg{u\p v\p}+\partial_y\avg{\partial_z\pars{w\p u\p}}=\nonumber\\
+=\pars{\partial_{yy}-\partial_{xx}}\avg{u\p v\p}+\partial_{xy}\pars{\avg{u\p u\p}-\avg{v\p v\p}}+\partial_y\avg{\partial_z\pars{w\p u\p}}-\partial_x\avg{\partial_z\pars{w\p v\p}},\label{eq:NS_spanwise_stresses}
+\end{gather}
+showing that the spanwise stresses in both formulations (Eqs. \ref{eq:vte_spanwise_stresses} and \ref{eq:NS_spanwise_stresses}) are equivalent.
+
+\section{Analytical validation and quadrature error analysis}
+
+The aim of this exercise is to analytically demonstrate the correct derivation of the SANS equations.
+The velocity vector field needs to be solenoidal and periodic, in agreement with the assumption used for the derivation of the simplified SANS equations (\eref{eq:sans_simple}). For this, the Taylor--Green vortex case is considered in a $2\pi$-periodic box.
+The pressure field is taken constant.
+The components of its periodic solenoidal initial velocity vector field might be written as
+\begin{gather}
+u = \cos (x) \sin (y) \sin (z), \label{eq:tg-u} \\
+v = \sin (x) \cos (y) \sin (z), \\
+w = -2 \sin (x) \sin (y) \cos (z),\label{eq:tg-w}
+\end{gather}
+which is indeed a solenoidal vector field
+\begin{gather}
+\nabla \cdot \vect{u} = \pd{u}{x}+\pd{v}{y}+\pd{w}{z}=\nonumber\\
+=- \sin (x) \sin (y) \sin (z)- \sin (x) \sin (y) \sin (z)+2\sin (x) \sin (y) \sin (z)=0.
+\end{gather}
+
+\subsection{No quadrature errors and spanwise periodicity}
+\label{sec:sans_analytical}
+
+The averaging operation in the spanwise direction $\avg{\cdot}$ is defined on the $z\in\left[a,b\right]$ interval as
+\begin{equation}
+\avg{q}\pars{x,y,t} = \frac{1}{b-a}\int^b_a q\pars{x,y,z,t}\,dz.
+\end{equation}
+Numerically, this carries a quadrature error which we will neglect for the moment.
+The following condition needs to hold true assuming an error-free quadrature and spanwise periodicity,
+\begin{equation}
+\avg{\mathcal{S}\left(\vect{u}, p\right)} = \tilde{\mathcal{S}}\left(\vect{U}, P\right) + \nabla\cdot\boldsymbol\tau_{ij}^R, \label{eq:balance}
+\end{equation}
+where
+\begin{align}
+\mathcal{S}= \vect{u}\cdot\nabla \vect{u} + \nabla p - \nu \nabla^2 \vect{u}, \qquad &\vect{u}=\pars{u,v,w},\,\,\, \vect{x}=\pars{x,y,z},\\
+ \tilde{\mathcal{S}}= \vect{U}\cdot\nabla \vect{U} + \nabla P - \nu \nabla^2 \vect{U}, \qquad &\vect{U} = \pars{U,V},\,\,\, \vect{x}=\pars{x,y}.
+\end{align}
+
+The derivation to validate the SANS equations will be performed for the $\vect{e}_x$ component of \eref{eq:balance}.
+In a $L=b-a=2\pi$ domain and considering the velocity vector field defined in \eref{eq:tg-u} to \eref{eq:tg-w}, we obtain $\vect{U}=\pars{0,0,0}$, so $\vect{u}=\vect{u}\p$.
+
+We begin calculating the LHS of \eref{eq:balance},
+\begin{equation}
+\avg{\mathcal{S}}\vect{e}_x=\avg{u\pd{u}{x}+v\pd{u}{y}+w\pd{u}{z}+\pd{p}{x}-\nu\pars{\ddn{u}{x}{2}+\ddn{u}{y}{2}+\ddn{u}{z}{2}}}.\label{eq:LHS}
+\end{equation}
+The required derivatives are
+\begin{gather}
+\begin{align}
+\pd{u}{x}&=-\sin (x) \sin (y) \sin (z), \qquad \ddn{u}{x}{2}=-\cos (x) \sin (y) \sin (z)=-u,\\
+\pd{u}{y}&= \cos (x) \cos (y) \sin (z), \qquad\,\,\,\,\, \ddn{u}{y}{2}=-\cos (x) \sin (y) \sin (z)=-u,\\
+\pd{u}{z}&=\cos (x) \sin (y) \cos (z), \qquad\,\,\,\,\, \ddn{u}{z}{2}=-\cos (x) \sin (y) \sin (z)=-u.
+\end{align}
+\end{gather}
+
+Substituting the derivatives into \eref{eq:LHS} yields
+\begin{gather}
+\avg{\mathcal{S}}\vect{e}_x=\avg{u\pd{u}{x}+v\pd{u}{y}+w\pd{u}{z}+\pd{p}{x}-\nu\pars{\ddn{u}{x}{2}+\ddn{u}{y}{2}+\ddn{u}{z}{2}}}= \nonumber \\
+=\bigl\langle-\sin (x) \cos (x) \sin^2 (y) \sin^2 (z) + \sin (x) \cos (x) \cos^2 (y) \sin^2 (z)-\nonumber\\
+\quad\;\;-2\sin (x) \cos (x) \sin^2 (y) \cos^2 (z) + 3\nu u \bigr\rangle = \nonumber\\
+=-\frac{\pi}{2\pi}\sin (x) \cos (x) \sin^2 (y) + \frac{\pi}{2\pi} \sin (x) \cos (x) \cos^2 (y) -\frac{2\pi}{2\pi} \sin (x) \cos (x) \sin^2 (y) + 0=\nonumber\\
+=\frac{1}{2}\sin(x) \cos(x) \pars{\cos^2(y)-3\sin^2(y)}.
+\label{eq:b21_lhs}
+\end{gather}
+
+Next, we calculate the RHS of \eref{eq:balance}. Note that $\tilde{\mathcal{S}}=0$ because $\vect{U}=0$ and the pressure is constant.
+Hence, only the spanwise stresses remain, analytically
+\begin{gather}
+\pars{\nabla\cdot\boldsymbol\tau_{ij}^R}\vect{e}_x = \pd{}{x}\avg{u\p u\p}+\pd{}{y}\avg{u\p v\p} = \pd{}{x}\avg{u u}+\pd{}{y}\avg{u v} = \nonumber \\
+=\pd{}{x}\pars{\avg{\cos^2(x) \sin^2(y) \sin^2(z)}}+\pd{}{y}\pars{\avg{\sin(x)\cos(x)\sin(y)\cos(y)\sin^2(z)}}=\nonumber \\
+=\pd{}{x}\pars{ \frac{\pi }{2\pi }\cos^2(x) \sin^2(y)}+\pd{}{y}\pars{\frac{\pi }{2\pi }\sin(x)\cos(x)\sin(y)\cos(y)}=\nonumber \\
+=-\sin(x)\cos(x)\sin^2(y) +\frac{1}{2}\sin(x)\cos(x)\pars{\cos^2(x)-\sin^2(x)}=\nonumber \\
+=\frac{1}{2} \sin(x) \cos(x) \pars{\cos^2(y)-3\sin^2(y)}.
+\label{eq:b21_rhs}
+\end{gather}
+
+Finally, we can show that \eref{eq:balance} has the correct balance between both sides by bringing all the pieces together, i.e. using \eref{eq:b21_lhs} as LHS and \eref{eq:b21_rhs} as RHS,
+\begin{equation}
+\frac{1}{2} \sin(x) \cos(x) \pars{\cos^2(y)-3\sin^2(y)} = 0 + \frac{1}{2} \sin(x) \cos(x) \pars{\cos^2(y)-3\sin^2(y)}.
+\end{equation}
+
+\subsection{Quadrature errors without spanwise periodicity}
+\label{sec:sans_quadrature_errors1}
+
+When quadrature errors arising from the averaging operation are considered, we have to recall the second-line terms in \eref{eq:sans_full} that were neglected in the previous section.
+The quadrature error depends on the function being averaged and the quadrature itself.
+From here, we will consider the composite trapezoidal quadrature which has the following associated error on the integral interval $[a,b]$
+\begin{equation}
+\epsilon_T(\xi) = -\frac{(b-a)h^2}{12} f''(\xi), \qquad \xi \in [a,b],
+\end{equation}
+where $h$ is the subinterval (spacing) length defined as $h=(b-a)/N$, and $N$ is the number of subintervals for $N+1$ quadrature points.
+Note that the convergence error is $\mathcal{O}\pars{h^2}$ and the presence of $f''$, which implies that the trapezoidal rule can perfectly calculate the quadrature of zero and first degree polynomial functions.
+
+For the Taylor--Green vortex case, only first- and second-degree trigonometric functions are required. We can quantify the error associated to its quadrature using the definition above in the $2\pi$ interval as
+\begin{gather}
+I_1 =\int^{2\pi}_0 \sin(z) dz, \\
+\epsilon_1\pars{\xi} := I_1 - I_{1,N} = \frac{\pi h^2}{6} \sin(\xi),
+\end{gather}
+and
+\begin{gather}
+I_2 =\int^{2\pi}_0 \sin^2(z) dz, \\
+\epsilon_2\pars{\xi} := I_2 - I_{2,N} = -\frac{\pi h^2}{6} \bracs{2\pars{\cos^2(\xi)-\sin^2(\xi)}}.
+\end{gather} 
+Next, we bound $\epsilon_1$ and $\epsilon_2$ with $|f''(\xi)|_{\max}$ within $[0,2\pi]$,
+\begin{gather}
+|\epsilon_1|_{\max} = \frac{\pi h^2}{6} \cdot 1, \\
+|\epsilon_2|_{\max} = \frac{\pi h^2}{6} \cdot 2,
+\end{gather}
+hence
+\begin{equation}
+|\epsilon_2|_{\max}= 2|\epsilon_1|_{\max}.
+\end{equation}
+Defining $I_1^*$ and $I_2^*$ as $I^* = I/(2\pi)$, we obtain
+\begin{gather}
+I^*_1 = \frac{0+\epsilon}{2\pi}=\frac{\epsilon}{2\pi}, \\
+I^*_2 = \frac{\pi+2\epsilon}{2\pi}=\frac{1}{2}+\frac{\epsilon}{\pi},
+\end{gather}
+where $\epsilon = \pi h^2/6$. Note that $I^*_1$ and $I^*_2$ using $\cos(z)$ instead of $\sin(z)$ are similarly calculated. 
+
+Considering quadrature errors, \eref{eq:balance} has to be corrected with the terms previously neglected because of spanwise periodicity,
+\begin{equation}
+\avg{\mathcal{S}\left(\vect{u}, p\right)} = \tilde{\mathcal{S}}\left(\vect{U}, P\right) + \nabla\cdot\boldsymbol\tau_{ij}^R+W\avg{\partial_z\vect{u}\p}-\nu\avg{\partial_{zz}\vect{u}\p}+\avg{\partial_z\pars{w\p\vect{u}\p}}.\label{eq:balance_all}
+\end{equation}
+
+We proceed by calculating again the new average and fluctuating quantities using the errors described above as follows
+\begin{gather}
+U = \frac{\epsilon}{2\pi}\cos(x)\sin(y),\qquad u\p=\cos(x)\sin(y)\pars{\sin(z)-\frac{\epsilon}{2\pi}},\\
+V = \frac{\epsilon}{2\pi}\sin(x)\cos(y),\qquad v\p=\sin(x)\cos(y)\pars{\sin(z)-\frac{\epsilon}{2\pi}},\\
+W = -\frac{\epsilon}{\pi}\sin(x)\sin(y),\,\,\,\,\, w\p=2\sin(x)\sin(y)\pars{\frac{\epsilon}{2\pi}-\cos(z)}.
+\end{gather}
+With this, the LHS of \eref{eq:balance_all} can be written as
+\begin{gather}
+\avg{\mathcal{S}}\vect{e}_x=\avg{u\pd{u}{x}+v\pd{u}{y}+w\pd{u}{z}+\pd{p}{x}-\nu\pars{\ddn{u}{x}{2}+\ddn{u}{y}{2}+\ddn{u}{z}{2}}}=\nonumber \\ 
+=\bigl\langle-\sin (x) \cos (x) \sin^2 (y) \sin^2 (z) + \sin (x) \cos (x) \cos^2 (y) \sin^2 (z)-\nonumber\\
+\quad\;\;-2\sin (x) \cos (x) \sin^2 (y) \cos^2 (z) + 3\nu u \bigr\rangle = \nonumber\\
+=-\pars{\frac{1}{2}+\frac{\epsilon}{\pi}}\sin(x)\cos(x)\sin^2(y) +\pars{\frac{1}{2}+\frac{\epsilon}{\pi}}\sin(x)\cos(x)\cos^2(y) \nonumber \\
+-2\pars{\frac{1}{2}+\frac{\epsilon}{\pi}}\sin(x)\cos(x)\sin^2(y)+3\nu\frac{\epsilon}{2\pi}\cos(x)\sin(y) = \nonumber\\
+=\pars{\frac{1}{2}+\frac{\epsilon}{\pi}}\sin(x)\cos(x)\pars{\cos^2(y)-3\sin^2(y)}+3\nu\frac{\epsilon}{2\pi}\cos(x)\sin(y).\label{eq:S_avg}
+\end{gather}
+
+The spatial operator of the spanwise-averaged quantities $(\tilde{\mathcal{S}})$ considering quadrature errors can be written as
+\begin{gather}
+\tilde{\mathcal{S}}\,\vect{e}_x=U\pd{U}{x}+V\pd{U}{y}+\pd{P}{x}-\nu\pars{\ddn{U}{x}{2}+\ddn{U}{y}{2}}=\nonumber\\
+=\frac{\epsilon}{2\pi}\cos(x)\sin(y)\pd{}{x}\pars{\frac{\epsilon}{2\pi}\cos(x)\sin(y)}+\frac{\epsilon}{2\pi}\sin(x)\cos(y)\pd{}{y}\pars{\frac{\epsilon}{2\pi}\cos(x)\sin(y)}+0-\nonumber\\
+-\nu\bracs{\ddn{}{x}{2}\pars{\frac{\epsilon}{2\pi}\cos(x)\sin(y)}+\ddn{}{y}{2}\pars{\frac{\epsilon}{2\pi}\cos(x)\sin(y)}}=\nonumber\\
+=-\pars{\frac{\epsilon}{2\pi}}^2\sin(x)\cos(x)\sin^2(x)+\pars{\frac{\epsilon}{2\pi}}^2\sin(x)\cos(x)\cos^2(y)+2\nu\frac{\epsilon}{2\pi}\cos(x)\sin(y)=\nonumber\\
+=\pars{\frac{\epsilon}{2\pi}}^2\sin(x)\cos(x)\pars{\cos^2(y)-\sin^2(x)}+\nu\frac{\epsilon}{\pi}\cos(x)\sin(y).\label{eq:S_tilde}
+\end{gather}
+
+And $\pars{\nabla\cdot\boldsymbol\tau_{ij}^R}\vect{e}_x$ is calculated as follows
+\begin{gather}
+\pars{\nabla\cdot\boldsymbol\tau_{ij}^R}\vect{e}_x=\pd{}{x}\avg{u\p u\p}+\pd{}{y}\avg{u\p v\p} =\nonumber\\
+=\pd{}{x}\pars{\avg{\cos^2(x) \sin^2(y) \pars{\sin(z)-\frac{\epsilon}{2\pi}}^2}}+\nonumber\\
++\pd{}{y}\pars{\avg{\sin(x)\cos(x)\sin(y)\cos(y)\pars{\sin(z)-\frac{\epsilon}{2\pi}}^2}}=\nonumber \\
+=\pd{}{x}\pars{\cos^2(x) \sin^2(y)\avg{ \pars{\sin^2(z)+\pars{\frac{\epsilon}{2\pi}}^2-\frac{\epsilon}{\pi}\sin(z)}}}+\nonumber\\
++\pd{}{y}\pars{\sin(x)\cos(x)\sin(y)\cos(y)\avg{\pars{\sin^2(z)+\pars{\frac{\epsilon}{2\pi}}^2-\frac{\epsilon}{\pi}\sin(z)}}}=\nonumber \\
+=\bracs{\frac{1}{2}+\frac{\epsilon}{\pi}+\pars{\frac{\epsilon}{2\pi}}^2-\frac{1}{2}\pars{\frac{\epsilon}{\pi}}^2}\Bigg[\pd{}{x}\pars{\cos^2(x) \sin^2(y)}+\nonumber\\
++\pd{}{y}\pars{\sin(x)\cos(x)\sin(y)\cos(y)}\Bigg]=\nonumber\\
+=\bracs{\frac{1}{2}+\frac{\epsilon}{\pi}-\frac{1}{4}\pars{\frac{\epsilon}{\pi}}^2}\sin(x)\cos(x)\pars{\cos^2(y)-3\sin^2(y)}.\label{eq:divT}
+\end{gather}
+
+Next, we calculate the terms neglected in the previous section
+\begin{gather}
+W\avg{\partial_z\vect{u}\p}-\nu\avg{\partial_{zz}\vect{u}\p}+\avg{\partial_z\pars{w\p\vect{u}\p}}=\nonumber \\
+=-\frac{\epsilon}{\pi}\sin(x)\sin(y)\avg{\pd{}{z}\pars{\cos(x)\sin(y)\pars{\sin(z)-\frac{\epsilon}{2\pi}}}}-\nonumber \\ 
+-\nu\avg{\ddn{}{z}{2}\pars{\cos(x)\sin(y)\pars{\sin(z)-\frac{\epsilon}{2\pi}}}}+\nonumber \\
++\avg{\pd{}{z}\pars{\cos(x)\sin(y)\pars{\sin(z)-\frac{\epsilon}{2\pi}}2\sin(x)\sin(y)\pars{\frac{\epsilon}{2\pi}-\cos(z)}}}=\nonumber
+\end{gather}
+\begin{gather}
+=-\frac{\epsilon}{\pi}\sin(x)\cos(x)\sin^2(y)\avg{\cos(z)}+\nu\cos(x)\sin(y)\avg{\sin(z)}+\nonumber\\
++2\sin(x)\cos(x)\sin^2(y)\avg{\pd{}{z}\pars{\frac{\epsilon}{2\pi}\sin(z)+\frac{\epsilon}{2\pi}\cos(z)-\sin(z)\cos(z)-\pars{\frac{\epsilon}{2\pi}}^2}}=\nonumber\\
+=-\frac{1}{2}\pars{\frac{\epsilon}{\pi}}^2\sin(x)\cos(x)\sin^2(y)+\nu\frac{\epsilon}{2\pi}\cos(x)\sin(y)+\nonumber\\
++2\sin(x)\cos(x)\sin^2(y)\avg{\frac{\epsilon}{2\pi}\cos(z)-\frac{\epsilon}{2\pi}\sin(z)+\sin^2(z)-\cos^2(z)}=\nonumber\\
+=-\frac{1}{2}\pars{\frac{\epsilon}{\pi}}^2\sin(x)\cos(x)\sin^2(y)+\nu\frac{\epsilon}{2\pi}\cos(x)\sin(y)+\nonumber\\
++2\sin(x)\cos(x)\sin^2(y)\cancelto{0}{\bracs{\pars{\frac{\epsilon}{2\pi}}^2-\pars{\frac{\epsilon}{2\pi}}^2+\frac{1}{2}+\frac{\epsilon}{\pi}-\frac{1}{2}-\frac{\epsilon}{\pi}}}=\nonumber\\
+=-\frac{1}{2}\pars{\frac{\epsilon}{\pi}}^2\sin(x)\cos(x)\sin^2(y)+\nu\frac{\epsilon}{2\pi}\cos(x)\sin(y).\label{eq:extra}
+\end{gather}
+We note that $\avg{\partial_z\pars{w\p\vect{u}\p}}$ automatically cancels out.
+
+Putting all the pieces together (Eqs. \ref{eq:S_avg}, \ref{eq:S_tilde}, \ref{eq:divT} \& \ref{eq:extra} into \eref{eq:balance_all}) we obtain the error between the balance of its LHS and RHS as follows
+\begin{gather}
+\mathcal{E} = \left|\avg{\mathcal{S}\left(\vect{u}, p\right)} - \tilde{\mathcal{S}}\left(\vect{U}, P\right) - \nabla\cdot\boldsymbol\tau_{ij}^R - W\avg{\partial_z\vect{u}\p}+\nu\avg{\partial_{zz}\vect{u}\p} - \avg{\partial_z\pars{w\p\vect{u}\p}}\right|=\nonumber\\
+=\Bigg|\cancel{\pars{\frac{1}{2}+\frac{\epsilon}{\pi}}\sin(x)\cos(x)\pars{\cos^2(y)-3\sin^2(y)}}+\bcancel{3\nu\frac{\epsilon}{2\pi}\cos(x)\sin(y)} - \nonumber\\
+- \pars{\frac{\epsilon}{2\pi}}^2\sin(x)\cos(x)\pars{\cos^2(y)-\sin^2(x)}-\bcancel{\nu\frac{\epsilon}{\pi}\cos(x)\sin(y)} - \nonumber \\
+- \bracs{\cancel{\frac{1}{2}+\frac{\epsilon}{\pi}}-\frac{1}{4}\pars{\frac{\epsilon}{\pi}}^2}\sin(x)\cos(x)\pars{\cos^2(y)-3\sin^2(y)}+ \nonumber \\
++\frac{1}{2}\pars{\frac{\epsilon}{\pi}}^2\sin(x)\cos(x)\sin^2(y)-\bcancel{\nu\frac{\epsilon}{2\pi}\cos(x)\sin(y)}\Bigg| \nonumber=\\
+=\Bigg|-\frac{1}{4}\pars{\frac{\epsilon}{\pi}}^2\sin(x)\cos(x)\pars{\cos^2(y)-\sin^2(x)}+\nonumber\\
++\frac{1}{4}\pars{\frac{\epsilon}{\pi}}^2\sin(x)\cos(x)\pars{\cos^2(y)-3\sin^2(y)}+\frac{1}{2}\pars{\frac{\epsilon}{\pi}}^2\sin(x)\cos(x)\sin^2(y)\Bigg| \nonumber= \\
+=\Bigg|-\frac{1}{2}\pars{\frac{\epsilon}{\pi}}^2\sin(x)\cos(x)\sin^2(x)+\frac{1}{2}\pars{\frac{\epsilon}{\pi}}^2\sin(x)\cos(x)\sin^2(y)\Bigg|= 0.
+\end{gather}
+
+With this, we can conclude that the quadratic errors arising from the RHS of \eref{eq:balance_all} cancel out with each other.
+Also, the linear errors arising on both LHS and RHS also cancel each other.
+
+\subsection{Quadrature error with spanwise periodicity}
+\label{sec:sans_quadrature_errors2}
+
+The SANS derivation employed in \cref{chapter:sans} and \cref{chapter:zanspy} (\eref{eq:balance}) neglects errors arising from the quadratures of spanwise derivatives (second line of \eref{eq:sans_full}).
+Because of this, \eref{eq:balance_all} is not balanced.
+Here, we derive the error associated to this practice.
+Inserting the previously derived terms into \eref{eq:balance} carries the following error
+\begin{gather}
+\mathcal{E} = \avg{\mathcal{S}\left(\vect{u}, p\right)} - \tilde{\mathcal{S}}\left(\vect{U}, P\right) - \nabla\cdot\boldsymbol\tau_{ij}^R=\nonumber\\
+=\cancel{\pars{\frac{1}{2}+\frac{\epsilon}{\pi}}\sin(x)\cos(x)\pars{\cos^2(y)-3\sin^2(y)}}+3\nu\frac{\epsilon}{2\pi}\cos(x)\sin(y) - \nonumber\\
+- \pars{\frac{\epsilon}{2\pi}}^2\sin(x)\cos(x)\pars{\cos^2(y)-\sin^2(x)}-{\nu\frac{\epsilon}{\pi}\cos(x)\sin(y)} - \nonumber \\
+- \bracs{\cancel{\frac{1}{2}+\frac{\epsilon}{\pi}}-\frac{1}{4}\pars{\frac{\epsilon}{\pi}}^2}\sin(x)\cos(x)\pars{\cos^2(y)-3\sin^2(y)} \nonumber=\\
+=\frac{\epsilon}{\pi}\nu\cos(x)\sin(y) - \frac{1}{4}\pars{\frac{\epsilon}{\pi}}^2\sin(x)\cos(x)\pars{\cos^2(y)-\sin^2(x)} + \nonumber \\
++\frac{1}{4}\pars{\frac{\epsilon}{\pi}}^2\sin(x)\cos(x)\pars{\cos^2(y)-3\sin^2(y)} \nonumber=\\
+=\frac{\epsilon}{\pi}\nu\cos(x)\sin(y)-\frac{1}{2}\pars{\frac{\epsilon}{\pi}}^2\sin(x)\cos(x)\sin^2(y),
+\end{gather}
+which corresponds indeed to the derivation of \eref{eq:extra}
+\begin{equation}
+\mathcal{E}=|\avg{w}\avg{\partial_z\vect{u}\p}-\nu\avg{\partial_{zz}\vect{u}\p}|.
+\end{equation}
+It can be observed that, given $\epsilon$ is a small positive number, the viscous term has a larger contribution to the model error.
+
+It is important to note that the midpoint and trapezoidal quadratures obtain a higher convergence rate when the integrand is periodic and smooth \citep{Weideman2002,Trefethen2014}, precisely from $\mathcal{O}(h^2)$ to $\mathcal{O}(e^{-1/h})$.
+Applying the spanwise-periodicity constraint in our problem and considering incompressible flow (smooth functions), the quadrature error should converge faster than the spatial discretisation error of the governing equations $\pars{\mathcal{O}(h^2)}$.
+% ---------------------------------------------------------------- 
+\end{document}

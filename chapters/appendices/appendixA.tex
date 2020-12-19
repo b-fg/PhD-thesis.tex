@@ -1,0 +1,67 @@
+%% ----------------------------------------------------------------
+%% Appendix: Reynolds egimes of flow past a circular cylinder
+%% ----------------------------------------------------------------
+%!TeX root = subfile
+\label{chapter:appendixA}
+\markboth{Appendix A Reynolds regimes of flow past a circular cylinder}{Appendix A Reynolds regimes of flow past a circular cylinder}
+\documentclass[../main.tex]{subfiles}
+% ---------------------------------------------------------------- 
+\begin{document}
+The classification of flow past a circular cylinder according to its Reynolds regime is summarised in \tref{tab:Re_regimes}.
+The flow remains laminar, steady and 2-D along the span up to $Re<47$ and, from this point onwards, vortex shedding starts to develop.
+A supercritical Hopf bifurcation is responsible for the onset of the laminar vortex shedding \citep{Williamson1996a}.
+An oblique shedding with respect to the axis of the cylinder might also be observed when perturbations are introduced into the end-boundaries of the cylinder (often arising in experiments rather than numerical simulations).
+Otherwise, the wake remains 2-D up to $Re=160-180$, where the first 3-D instability at the wake (Mode A) comes into the picture.
+This mode arises naturally and is characterised by streamwise vortices with a spanwise wavelength ($\lambda_z$) of approximately 4 diameters.
+The shedding frequency ($f_s$) experiences a rapid decrease at the onset of this instability.
+There is no general agreement on the physical mechanism driving this instability even though some authors suggest a core instability, braid instability, elliptical vortex instability or centrifugal instability \citep{Noack1999}.
+
+\begin{table}[!htpb]
+\centering
+\captionsetup{width=0.82\textwidth}
+  \caption{Reynolds regimes of incompressible viscous flow past a circular cylinder. Note that some Reynolds numbers might differ among authors.}
+  \begin{tabular}{lAAA}
+    \toprule
+    \multicolumn{1}{l}{Flow phenomenon}&\multicolumn{2}{c}{Reynolds regime}&\\ 
+    \midrule
+    Laminar 2-D steady & &\phantom{<} \hspace{0.2cm} Re<47\\
+    Laminar 2-D vortex shedding & 47 &<Re<80\\
+    Mode A 3-D wake transition ($\lambda_z/D\approx4$) & 180&<Re<230\\
+    Mode B 3-D wake transition ($\lambda_z/D\approx1$) & 200&<Re<10^4-10^5\\
+    Mode C 3-D wake transition ($\lambda_z/D\approx2$) & 170&<Re<270\\ 
+    Turbulent wake transition & 260&<Re<300\\   
+    Subcritical regime & 250&<Re<2\cdot 10^5\\
+    Drag crisis & 2\cdot 10^5&<Re<4\cdot 10^5\\
+    Supercritical regime & 4\cdot 10^5&<Re\\        
+    \bottomrule
+  \end{tabular}  
+  \label{tab:Re_regimes}
+\end{table}
+
+Around $Re=200-230$, Mode B takes place and Mode A gradually decreases.
+The Mode B instability presents a spanwise wavelength of roughly $1D$.
+Rib-like streamwise vortices are generated and the mode becomes more dominant as $Re$ increases, eventually replacing all other transition modes at $Re=260$.
+During this process, the wake spanwise correlation length increases as well.
+With this, it can be noted that the natural wake transition scenario is successively: 2-D vortex shedding, Mode A, Mode B.
+The Mode C instability is not a natural mode since it requires direct excitation from added perturbations or specific boundary conditions.
+It is characterised by a $2T_s$ vortex-shedding period, a spanwise wavelength in the order of 2 diameters, and it has been observed typically within $Re<300$.
+For $Re>270$, the Mode C instability periodicity becomes less apparent as the wake transitions to a turbulent state \citep{Jiang2020}.
+Further information including diagrams and flow visualisations of 3-D instability mechanisms can be found in \cite{Williamson1996b, Williamson1996a}.
+
+It is difficult to accurately define the actual turbulence transition point on the wake and this is normally indicated through temporal averages.
+The transition to turbulence is triggered by the interaction of the different wake instabilities.
+With increasing Reynolds number, the subcritical regime takes place.
+A sharp decrease of the lift force on the cylinder (increase on base suction) is found as well as a decrease in the Strouhal number.
+Up to $Re=5\cdot 10^3$, the transition appears to be caused by rib-like vortices of Mode B-type and the transition point is in a fixed streamwise position with respect to the cylinder.
+As the Reynolds number increases, the transition is driven by 3-D structures generated through the interaction of the K\'{a}rm\'{a}n vortices with the separated shear layer, a.k.a. shear-layer transition regime.
+This results into an upstream displacement of the transition point \citep{Bloor1964,Williamson1996a,Norberg2001}.
+
+The drag crisis is observed at $Re=2\cdot 10^5$ and arises because of the cylinder boundary layer becoming turbulent.
+This causes the separated shear layer to narrow as the separation points are moved towards the rear part of the cylinder.
+A sharp reduction in drag and base suction can be appreciated.
+Laminar separation bubbles can also be observed on the cylinder surface.
+Finally, above $Re=4\cdot 10^5$, the supercritical (and transcritical for $Re>10^6$) regime is defined.
+The wake is further narrowed and the shedding frequency increases.
+Asymmetrical (laminar/transitional) states of separation bubbles at both upper and lower sides of the cylinder can be observed \citep{Noack1999b}.
+% ---------------------------------------------------------------- 
+\end{document}

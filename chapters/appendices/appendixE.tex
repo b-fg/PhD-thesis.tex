@@ -1,0 +1,25 @@
+%% ----------------------------------------------------------------
+%% Appendix: Hardware details
+%% ----------------------------------------------------------------
+%!TeX root = subfile
+\label{chapter:appendixE}
+\markboth{Appendix E Hardware details}{Appendix E Hardware details}
+\documentclass[../main.tex]{subfiles}
+% ---------------------------------------------------------------- 
+\begin{document}
+The 3-D simulations employed throughout the thesis have been performed in the Iridis4 supercomputer at the University of Southampton.
+The fluid solver is run in 128 parallel processes across 8 different nodes.
+Each node is equipped with 16x 2.6 GHz Intel\textsuperscript\textregistered $ $ Sandybridge\texttrademark $ $ processors. With this set-up, 205 hours of computational time was spent for the dataset generation used in \cref{chapter:zanspy}.
+A NVIDIA\textsuperscript\textregistered $ $ Tesla V100 GPU is used for training the ML model in the Iridis5 supercomputer.
+It takes approximately 30 minutes to iterate through the training dataset (i.e. 30 min./epoch).
+
+In the a-posteriori analysis, the fluid solver (Fortran) and the ML model (Python) need to run in sync.
+At every time step, the resolved quantities data is transferred to the ML model in order to compute the closure terms.
+After the prediction is completed, the closure terms are sent back to the fluid solver to compute the solution of the next time step.
+This has been accomplished using network sockets, a data transfer protocol between processes living in the same network.
+In particular, internet sockets have been employed allowing to transfer data across a network port.
+An example of Fortran-Python sockets data transfer can be found in \cite{Font2019-f2py}.
+Since the SANS simulation is purely 2-D, this has been carried in a 4.0 GHz Intel\textsuperscript\textregistered $ $ Core\texttrademark $\,\,$i7-6700K processor using serial computations.
+It takes approximately 40 minutes to complete $\Delta t^*=10$ time units in this a-posteriori configuration.
+% ---------------------------------------------------------------- 
+\end{document}
